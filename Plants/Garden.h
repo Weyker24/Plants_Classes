@@ -29,6 +29,21 @@ enum G_month
 	DECEMBER
 };
 
+enum G_type
+{
+	HOME,
+	GARDEN,
+	WILD
+};
+
+enum G_habitat
+{
+	TUNDRA,
+	DESERT,
+	STEPPE,
+	SIBERIA
+};
+
 class Plant {
 	string name;
 public:
@@ -59,6 +74,18 @@ public:
 	void Out(ofstream &);
 	Shrub();
 	~Shrub()
+	{
+		void Clear();
+	}
+};
+
+class Flower : public Plant {
+	G_type type;
+public:
+	void In(ifstream &);
+	void Out(ofstream &);
+	Flower();
+	~Flower()
 	{
 		void Clear();
 	}

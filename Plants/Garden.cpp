@@ -39,6 +39,25 @@ void Shrub::Out(ofstream &file)
 	file << months[month] << "." << endl;
 }
 
+Flower::Flower()
+{
+	;
+}
+void Flower::In(ifstream &file)
+{
+	int tmp;
+	file >> tmp;
+	type = (G_type)(tmp - 1);
+}
+
+void Flower::Out(ofstream &file)
+{
+	file << "Объект типа: цветы. Название: ";
+	this->OutCommon(file);
+	string types[] = { "Домашние", "Садовые", "Дикие" };
+	file << "Тип растения: " << types[type] << ". " << endl;// << "Количество согласных букв = " << OutConsonant() << "." << endl;
+}
+
 void Plant::InCommon(ifstream& file)
 {
 	file >> name;
@@ -63,6 +82,11 @@ Plant *Plant::InPlant(ifstream &file)
 	else if (key == 2)
 	{
 		x = new Shrub();
+		x->InCommon(file);
+	}
+	else if (key == 3)
+	{
+		x = new Flower();
 		x->InCommon(file);
 	}
 	else
