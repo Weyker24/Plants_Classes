@@ -14,7 +14,7 @@ void Tree::Out(ofstream &file)
 {
 	file << "Объект типа: дерево. Название: ";
 	this->OutCommon(file);
-	file << ". Возраст: " << age << endl;
+	file << "Возраст: " << age << endl;
 }
 
 
@@ -34,7 +34,7 @@ void Shrub::Out(ofstream &file)
 {
 	file << "Объект типа: куст. Название: ";
 	OutCommon(file);
-	file << ". Месяц цветения: ";
+	file << "Месяц цветения: ";
 	string months[] = { "Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь" };
 	file << months[month] << "." << endl;
 }
@@ -65,7 +65,7 @@ void Plant::InCommon(ifstream& file)
 
 void Plant::OutCommon(ofstream& file)
 {
-	file << name;
+	file << name << ". ";
 }
 
 Plant *Plant::InPlant(ifstream &file)
