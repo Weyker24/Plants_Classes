@@ -29,8 +29,17 @@ enum G_month
 	DECEMBER
 };
 
+enum G_habitat
+{
+	TUNDRA,
+	DESERT,
+	STEPPE,
+	SIBERIA
+};
+
 class Plant {
 	string name;
+	G_habitat habitat;
 public:
 	void InCommon(ifstream &);
 	void OutCommon(ofstream &);
