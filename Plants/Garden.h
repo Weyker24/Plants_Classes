@@ -29,12 +29,33 @@ enum G_month
 	DECEMBER
 };
 
+enum G_type
+{
+	HOME,
+	GARDEN,
+	WILD
+};
+
+enum G_habitat
+{
+	TUNDRA,
+	DESERT,
+	STEPPE,
+	SIBERIA
+};
+
 class Plant {
 	string name;
+	G_habitat habitat;
+	int consonant;
 public:
 	void InCommon(ifstream &);
 	void OutCommon(ofstream &);
+
+	int OutConsonant();
+
 	static Plant *InPlant(ifstream &);
+	static int ConsonantCount(string &);
 
 	virtual void In(ifstream& in) = 0;
 	virtual void Out(ofstream& out) = 0;
@@ -64,6 +85,18 @@ public:
 	}
 };
 
+class Flower : public Plant {
+	G_type type;
+public:
+	void In(ifstream &);
+	void Out(ofstream &);
+	Flower();
+	~Flower()
+	{
+		void Clear();
+	}
+};
+
 class Node : public Plant {
 public:
 	Plant *cur = NULL;
@@ -86,6 +119,11 @@ class Container : public Plant {
 public:
 	void In(ifstream &);
 	void Out(ofstream &);
+
+	void Sort();
+	void Pop(Node *);
+	void Push(Node *, Node *, Node *);
+	void Swap(Node *, Node *);
 	Container();
 	~Container()
 	{

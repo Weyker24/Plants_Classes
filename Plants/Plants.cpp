@@ -49,6 +49,10 @@ int main(int argc, char* argv[])
 
 	container->Out(file_o);
 
+	container->Sort();
+
+	container->Out(file_o);
+
 	file_i.close();
 	file_o.close();
 
