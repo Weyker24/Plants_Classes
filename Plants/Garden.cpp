@@ -14,7 +14,7 @@ void Tree::Out(ofstream &file)
 {
 	file << "Объект типа: дерево. Название: ";
 	this->OutCommon(file);
-	file << ". Возраст: " << age << endl;
+	file << ". Возраст: " << age << ". Количество согласных букв = " << OutConsonant() << "." << endl;
 }
 
 
@@ -36,17 +36,38 @@ void Shrub::Out(ofstream &file)
 	OutCommon(file);
 	file << ". Месяц цветения: ";
 	string months[] = { "Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь" };
-	file << months[month] << "." << endl;
+	file << months[month] << ". Количество согласных букв = " << OutConsonant() << "." << endl;
+}
+
+int Plant::ConsonantCount(string &name)
+{
+	int consonant = 0;
+	string alphabet_consonant("БВГДЖЗКЛМНПРСТФХЦЧШЩбвгджзклмнпрстфхцчшщ");
+	for (unsigned int i = 0; i < name.length(); i++)
+	{
+		if (alphabet_consonant.find(name[i]) != string::npos)
+		{
+			consonant++;
+		}
+	}
+	cout << endl;
+	return consonant;
 }
 
 void Plant::InCommon(ifstream& file)
 {
 	file >> name;
+	consonant = ConsonantCount(name);
 }
 
 void Plant::OutCommon(ofstream& file)
 {
 	file << name;
+}
+
+int Plant::OutConsonant()
+{
+	return consonant;
 }
 
 Plant *Plant::InPlant(ifstream &file)
