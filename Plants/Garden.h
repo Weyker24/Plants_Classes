@@ -63,8 +63,6 @@ public:
 	void In(ifstream &);
 	void Out(ofstream &);
 
-	void OutShrub(ofstream &);
-
 	Shrub();
 	~Shrub()
 	{
