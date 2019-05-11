@@ -17,6 +17,10 @@ void Tree::Out(ofstream &file)
 	file << ". Возраст: " << age << endl;
 }
 
+void Tree::OutTree(ofstream &file)
+{
+	Out(file);
+}
 
 Shrub::Shrub()
 {
@@ -47,6 +51,11 @@ void Plant::InCommon(ifstream& file)
 void Plant::OutCommon(ofstream& file)
 {
 	file << name;
+}
+
+void Plant::OutTree(ofstream& file)
+{
+	;
 }
 
 Plant *Plant::InPlant(ifstream &file)
@@ -88,7 +97,7 @@ void Node::In(ifstream &file)
 
 void Node::Out(ofstream &file)
 {
-	cur->Out(file);
+	cur->OutTree(file);
 }
 
 Container::Container()

@@ -36,6 +36,8 @@ public:
 	void OutCommon(ofstream &);
 	static Plant *InPlant(ifstream &);
 
+	virtual void OutTree(ofstream &);
+
 	virtual void In(ifstream& in) = 0;
 	virtual void Out(ofstream& out) = 0;
 };
@@ -45,6 +47,9 @@ class Tree : public Plant {
 public:
 	void In(ifstream &);
 	void Out(ofstream &);
+
+	void OutTree(ofstream &);
+
 	Tree();
 	~Tree()
 	{
@@ -57,6 +62,9 @@ class Shrub : public Plant {
 public:
 	void In(ifstream &);
 	void Out(ofstream &);
+
+	void OutShrub(ofstream &);
+
 	Shrub();
 	~Shrub()
 	{
@@ -86,6 +94,7 @@ class Container : public Plant {
 public:
 	void In(ifstream &);
 	void Out(ofstream &);
+
 	Container();
 	~Container()
 	{
