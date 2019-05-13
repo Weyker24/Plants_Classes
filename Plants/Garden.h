@@ -47,10 +47,14 @@ enum G_habitat
 class Plant {
 	string name;
 	G_habitat habitat;
+	int consonant;
 public:
 	void InCommon(ifstream &);
 	void OutCommon(ofstream &);
+	int OutConsonant();
+
 	static Plant *InPlant(ifstream &);
+	static int ConsonantCount(string &);
 
 	virtual void In(ifstream& in) = 0;
 	virtual void Out(ofstream& out) = 0;
