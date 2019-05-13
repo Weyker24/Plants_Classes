@@ -175,6 +175,7 @@ void Container::In(ifstream &file)
 			return;
 		}
 	}
+	Sort();
 }
 
 void Container::Out(ofstream &file)
@@ -187,4 +188,66 @@ void Container::Out(ofstream &file)
 		node->Out(file);
 		node = node->next;
 	}
+}
+
+void Container::Sort()
+{
+	Node *node_cur = first->next;
+	Node *tmp;
+	Node *tmp2;
+
+	for (node_cur = first->next; node_cur != first;)
+	{
+		if (node_cur->cur->OutConsonant() < node_cur->prev->cur->OutConsonant())
+		{
+			tmp2 = node_cur;
+			node_cur = node_cur->next;
+			if (first->cur->OutConsonant() > tmp2->cur->OutConsonant())
+			{
+				Pop(tmp2);
+				Push(first->prev, first, tmp2);
+				first = tmp2;
+				last = tmp2->prev;
+			}
+			else
+			{
+				for (tmp = tmp2->prev; tmp != first->prev; tmp = tmp->prev)
+				{
+					if ((tmp->cur->OutConsonant() > tmp2->cur->OutConsonant()) && (tmp->prev->cur->OutConsonant() <= tmp2->cur->OutConsonant()))
+					{
+						Pop(tmp2);
+						Push(tmp->prev, tmp, tmp2);
+						break;
+					}
+				}
+			}
+		}
+		else
+		{
+			node_cur = node_cur->next;
+		}
+	}
+}
+
+void Container::Pop(Node *node)
+{
+	node->prev->next = node->next;
+	node->next->prev = node->prev;
+}
+//Вставляет node3 между node1 и node2.
+void Container::Push(Node *node1, Node *node2, Node *node3)
+{
+	node1->next = node3;
+	node2->prev = node3;
+	node3->prev = node1;
+	node3->next = node2;
+}
+
+void Container::Swap(Node *node1, Node *node2)
+{
+	Node *new_node = new Node;
+
+	new_node->cur = node2->cur;
+	node1->cur = node2->cur;
+	node2->cur = new_node->cur;
 }

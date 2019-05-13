@@ -118,6 +118,11 @@ class Container : public Plant {
 public:
 	void In(ifstream &);
 	void Out(ofstream &);
+
+	void Sort();
+	void Pop(Node *);
+	void Push(Node *, Node *, Node *);
+	void Swap(Node *, Node *);
 	Container();
 	~Container()
 	{
