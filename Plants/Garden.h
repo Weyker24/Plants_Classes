@@ -56,6 +56,8 @@ public:
 	static Plant *InPlant(ifstream &);
 	static int ConsonantCount(string &);
 
+	virtual void OutTree(ofstream &);
+
 	virtual void In(ifstream& in) = 0;
 	virtual void Out(ofstream& out) = 0;
 };
@@ -65,6 +67,9 @@ class Tree : public Plant {
 public:
 	void In(ifstream &);
 	void Out(ofstream &);
+
+	void OutTree(ofstream &);
+
 	Tree();
 	~Tree()
 	{
@@ -77,6 +82,7 @@ class Shrub : public Plant {
 public:
 	void In(ifstream &);
 	void Out(ofstream &);
+
 	Shrub();
 	~Shrub()
 	{
@@ -103,6 +109,7 @@ public:
 	Node *next = NULL;
 	void In(ifstream &);
 	void Out(ofstream &);
+	void OutTree(ofstream &);
 	Node();
 	~Node()
 	{
@@ -118,6 +125,7 @@ class Container : public Plant {
 public:
 	void In(ifstream &);
 	void Out(ofstream &);
+	void OutTree(ofstream &);
 
 	void Sort();
 	void Pop(Node *);

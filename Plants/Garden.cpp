@@ -17,6 +17,10 @@ void Tree::Out(ofstream &file)
 	file << ". Возраст: " << age << ". Количество согласных букв = " << OutConsonant() << "." << endl;
 }
 
+void Tree::OutTree(ofstream &file)
+{
+	Out(file);
+}
 
 Shrub::Shrub()
 {
@@ -94,6 +98,11 @@ int Plant::OutConsonant()
 	return consonant;
 }
 
+void Plant::OutTree(ofstream& file)
+{
+	;
+}
+
 Plant *Plant::InPlant(ifstream &file)
 {
 	int key;
@@ -141,6 +150,11 @@ void Node::Out(ofstream &file)
 	cur->Out(file);
 }
 
+void Node::OutTree(ofstream &file)
+{
+	cur->OutTree(file);
+}
+
 Container::Container()
 {
 	;
@@ -175,7 +189,7 @@ void Container::In(ifstream &file)
 			return;
 		}
 	}
-	Sort();
+
 }
 
 void Container::Out(ofstream &file)
@@ -186,6 +200,18 @@ void Container::Out(ofstream &file)
 	for (int i = 0; i < amount; i++)
 	{
 		node->Out(file);
+		node = node->next;
+	}
+}
+
+void Container::OutTree(ofstream &file)
+{
+	Node *node;
+	file << "Количество хранящихся элементов: " << amount << endl;
+	node = first;
+	for (int i = 0; i < amount; i++)
+	{
+		node->OutTree(file);
 		node = node->next;
 	}
 }
