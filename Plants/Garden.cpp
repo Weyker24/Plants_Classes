@@ -70,7 +70,7 @@ void Flower::Out(ofstream &file)
 	file << "Объект типа: цветы. Название: ";
 	this->OutCommon(file);
 	string types[] = { "Домашние", "Садовые", "Дикие" };
-	file << "Тип растения: " << types[type] << ". " << endl;// << "Количество согласных букв = " << OutConsonant() << "." << endl;
+	file << "Тип растения: " << types[type] << ". Количество согласных букв = " << OutConsonant() << "." << endl;
 }
 
 void Plant::InCommon(ifstream& file)
