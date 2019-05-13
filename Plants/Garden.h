@@ -36,8 +36,17 @@ enum G_type
 	WILD
 };
 
+enum G_habitat
+{
+	TUNDRA,
+	DESERT,
+	STEPPE,
+	SIBERIA
+};
+
 class Plant {
 	string name;
+	G_habitat habitat;
 public:
 	void InCommon(ifstream &);
 	void OutCommon(ofstream &);

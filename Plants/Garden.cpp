@@ -60,12 +60,17 @@ void Flower::Out(ofstream &file)
 
 void Plant::InCommon(ifstream& file)
 {
+	int tmp_i;
 	file >> name;
+	file >> tmp_i;
+	habitat = (G_habitat)(tmp_i - 1);
 }
 
 void Plant::OutCommon(ofstream& file)
 {
-	file << name << ". ";
+	file << name;
+	string habitat_a[] = { "Тундра", "Пустыня", "Степь", "Сибирь" };
+	file << " Место обитания: " << habitat_a[habitat] << ". ";
 }
 
 Plant *Plant::InPlant(ifstream &file)
