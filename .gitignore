@@ -4,6 +4,8 @@
 # User-specific files
 Plants/input.txt
 Plants/output.txt
+input.txt
+output.txt
 *.suo
 *.user
 *.userosscache
