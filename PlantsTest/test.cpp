@@ -109,13 +109,13 @@ TEST_F(MyClassCombo, WrongFileFormatTest4)
 	tree->In(file_i);
 	ASSERT_EQ(-2, ((Tree*)tree)->age);
 	file_i.close();
-	file_i.open("Test1_empty.txt");
+	file_i.open("Test5_empty.txt");
 	shrub->name = "test";
 	shrub->InCommon(file_i);
 	shrub->In(file_i);
 	ASSERT_EQ(0, ((Shrub*)shrub)->month);
 	file_i.close();
-	file_i.open("Test1_empty.txt");
+	file_i.open("Test5_empty.txt");
 	flower->name = "test";
 	flower->InCommon(file_i);
 	flower->In(file_i);

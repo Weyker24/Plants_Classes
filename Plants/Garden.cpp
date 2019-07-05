@@ -2,14 +2,11 @@
 #include "pch.h"
 #include "garden.h"
 
-#define max_types 4
-#define max_habitates 4
-
 bool is_number( string s )
 {
 	std::string::const_iterator it = s.begin();
 	isdigit( *it );
-	while ( it != s.end() && isdigit( *it ) ) ++it;
+	while ( it != s.end() && isdigit( (unsigned char) *it ) ) ++it;
 	return !s.empty() && it == s.end();
 }
 
@@ -37,7 +34,7 @@ void Tree::In( ifstream &file )
 	if ( tmp.empty() ) { age = -1; name = "fail"; return; }
 	if ( !is_number( tmp ) ) { age = -2; name = "fail"; return; }
 	else { age = stoi( tmp ); }
-	if ( age < 0 || age > 3000 ) { age = -3; name = "fail"; return; }
+	if ( age < 0 || age > MAX_TREE_LIFE ) { age = -3; name = "fail"; return; }
 }
 
 void Tree::Out( ofstream &file )
@@ -59,13 +56,13 @@ Shrub::Shrub()
 
 void Shrub::In( ifstream &file )
 {
-	month = ( G_month ) ( 0 );
+	month = ( GenMonth ) ( 0 );
 	string tmp;
 	getline( file, tmp );
-	if ( tmp.empty() ) { month = ( G_month ) ( 0 ); name = "fail"; return; }
-	if ( !is_number( tmp ) ) { month = ( G_month ) ( 0 ); name = "fail"; return; }
-	else { month = ( G_month ) stoi( tmp ); month = ( G_month ) ( stoi( tmp ) ); }
-	if ( stoi( tmp ) < 1 || stoi( tmp ) > 12 ) { month = ( G_month ) ( 0 ); name = "fail"; return; }
+	if ( tmp.empty() ) { month = ( GenMonth ) ( 0 ); name = "fail"; return; }
+	if ( !is_number( tmp ) ) { month = ( GenMonth ) ( 0 ); name = "fail"; return; }
+	else { month = ( GenMonth ) stoi( tmp ); month = ( GenMonth ) ( stoi( tmp ) ); }
+	if ( stoi( tmp ) < 1 || stoi( tmp ) > MAX_MONTHS ) { month = ( GenMonth ) ( 0 ); name = "fail"; return; }
 }
 
 void Shrub::Out( ofstream &file )
@@ -98,13 +95,13 @@ Flower::Flower()
 }
 void Flower::In( ifstream &file )
 {
-	type = ( G_type ) ( 0 );
+	type = ( GenType ) ( 0 );
 	string tmp;
 	getline( file, tmp );
-	if ( tmp.empty() ) { type = ( G_type ) ( 0 ); name = "fail"; return; }
-	if ( !is_number( tmp ) ) { type = ( G_type ) ( 0 ); name = "fail"; return; }
-	else { type = ( G_type ) stoi( tmp ); type = ( G_type ) ( stoi( tmp ) ); }
-	if ( stoi( tmp ) < 1 || stoi( tmp ) > 12 ) { type = ( G_type ) ( 0 ); name = "fail"; return; }
+	if ( tmp.empty() ) { type = ( GenType ) ( 0 ); name = "fail"; return; }
+	if ( !is_number( tmp ) ) { type = ( GenType ) ( 0 ); name = "fail"; return; }
+	else { type = ( GenType ) stoi( tmp ); type = ( GenType ) ( stoi( tmp ) ); }
+	if ( stoi( tmp ) < 1 || stoi( tmp ) > MAX_TYPES ) { type = ( GenType ) ( 0 ); name = "fail"; return; }
 }
 
 void Flower::Out( ofstream &file )
@@ -126,10 +123,10 @@ void Plant::InCommon( ifstream& file )
 	if ( tmp.length() > 20 ) { name = "fail"; return; }
 	//Ввод места обитания
 	getline( file, tmp );
-	if ( tmp.empty() ) { habitate = ( G_habitat ) ( 0 ); return; }
-	if ( !is_number( tmp ) ) { habitate = ( G_habitat ) ( 0 ); return; }
-	else { habitate = ( G_habitat ) stoi( tmp ); }
-	if ( stoi( tmp ) < 1 || stoi( tmp ) > max_habitates ) { habitate = ( G_habitat ) ( 0 ); return; }
+	if ( tmp.empty() ) { habitate = ( GenHabitat ) ( 0 ); return; }
+	if ( !is_number( tmp ) ) { habitate = ( GenHabitat ) ( 0 ); return; }
+	else { habitate = ( GenHabitat ) stoi( tmp ); }
+	if ( stoi( tmp ) < 1 || stoi( tmp ) > max_habitates ) { habitate = ( GenHabitat ) ( 0 ); return; }
 	consonant = ConsonantCount( name );
 }
 
