@@ -15,6 +15,7 @@ enum Type {
 
 enum G_month
 {
+	FAIL_M,
 	JANUARY,
 	FEBRUARY,
 	MARCH,
@@ -31,6 +32,7 @@ enum G_month
 
 enum G_type
 {
+	FAIL_T,
 	HOME,
 	GARDEN,
 	WILD
@@ -38,6 +40,7 @@ enum G_type
 
 enum G_habitat
 {
+	FAIL_H,
 	TUNDRA,
 	DESERT,
 	STEPPE,
@@ -45,10 +48,10 @@ enum G_habitat
 };
 
 class Plant {
-	string name;
-	G_habitat habitat;
-	int consonant;
 public:
+	string name;
+	G_habitat habitate;
+	int consonant;
 	void InCommon(ifstream &);
 	void OutCommon(ofstream &);
 	int OutConsonant();
@@ -63,8 +66,8 @@ public:
 };
 
 class Tree : public Plant {
-	int age;
 public:
+	int age;
 	void In(ifstream &);
 	void Out(ofstream &);
 
@@ -78,8 +81,8 @@ public:
 };
 
 class Shrub : public Plant {
-	G_month month;
 public:
+	G_month month;
 	void In(ifstream &);
 	void Out(ofstream &);
 
@@ -91,8 +94,8 @@ public:
 };
 
 class Flower : public Plant {
-	G_type type;
 public:
+	G_type type;
 	void In(ifstream &);
 	void Out(ofstream &);
 	Flower();

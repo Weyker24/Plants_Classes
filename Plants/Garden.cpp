@@ -1,13 +1,43 @@
 #pragma once
 #include "pch.h"
 #include "garden.h"
+
+#define max_types 4
+#define max_habitates 4
+
+bool is_number(string s)
+{
+	std::string::const_iterator it = s.begin();
+	isdigit(*it);
+	while (it != s.end() && isdigit(*it)) ++it;
+	return !s.empty() && it == s.end();
+}
+
+bool is_good_string(string s)
+{
+	std::string::const_iterator it = s.begin();
+	while (it != s.end() && isdigit(*it)) ++it;
+	return !s.empty() && it == s.end() && !(*it == ' ');
+}
+
+bool is_empty_file(std::ifstream& pFile)
+{
+	return pFile.peek() == std::ifstream::traits_type::eof();
+}
+
 Tree::Tree()
 {
 	;
 }
 void Tree::In(ifstream &file)
 {
-	file >> age;
+	age = 0;
+	string tmp;
+	getline(file, tmp);
+	if (tmp.empty()) { age = -1; name = "fail"; return; }
+	if (!is_number(tmp)) { age = -2; name = "fail"; return;}
+	else { age = stoi(tmp); }
+	if (age < 0 || age > 3000) { age = -3; name = "fail"; return;}
 }
 
 void Tree::Out(ofstream &file)
@@ -29,9 +59,13 @@ Shrub::Shrub()
 
 void Shrub::In(ifstream &file)
 {
-	int tmp;
-	file >> tmp;
-	month = (G_month)(tmp - 1);
+	month = (G_month)(0);
+	string tmp;
+	getline(file, tmp);
+	if (tmp.empty()) { month = (G_month)(0); name = "fail"; return;}
+	if (!is_number(tmp)) { month = (G_month)(0); name = "fail"; return;}
+	else { month = (G_month)stoi(tmp); month = (G_month)(stoi(tmp));}
+	if (stoi(tmp) < 1 || stoi(tmp) > 12) { month = (G_month)(0); name = "fail"; return;}
 }
 
 void Shrub::Out(ofstream &file)
@@ -64,9 +98,13 @@ Flower::Flower()
 }
 void Flower::In(ifstream &file)
 {
-	int tmp;
-	file >> tmp;
-	type = (G_type)(tmp - 1);
+	type = (G_type)(0);
+	string tmp;
+	getline(file, tmp);
+	if (tmp.empty()) { type = (G_type)(0); name = "fail"; return;}
+	if (!is_number(tmp)) { type = (G_type)(0); name = "fail";return;}
+	else { type = (G_type)stoi(tmp); type = (G_type)(stoi(tmp)); }
+	if (stoi(tmp) < 1 || stoi(tmp) > 12) { type = (G_type)(0); name = "fail"; return;}
 }
 
 void Flower::Out(ofstream &file)
@@ -79,10 +117,19 @@ void Flower::Out(ofstream &file)
 
 void Plant::InCommon(ifstream& file)
 {
-	int tmp_i;
-	file >> name;
-	file >> tmp_i;
-	habitat = (G_habitat)(tmp_i - 1);
+	string tmp;
+	//Ввод имени
+	getline(file, tmp);
+	if (tmp.empty()) { name = "fail"; return; }
+	if (is_number(tmp) && is_good_string(tmp)) { name = "fail"; return; }
+	else { name = tmp; }
+	if (tmp.length() > 20) { name = "fail"; return; }
+	//Ввод места обитания
+	getline(file, tmp);
+	if (tmp.empty()) { habitate = (G_habitat)(0); return; }
+	if (!is_number(tmp)) { habitate = (G_habitat)(0); return; }
+	else { habitate = (G_habitat)stoi(tmp); }
+	if (stoi(tmp) < 1 || stoi(tmp) > max_habitates) { habitate = (G_habitat)(0); return; }
 	consonant = ConsonantCount(name);
 }
 
@@ -90,7 +137,7 @@ void Plant::OutCommon(ofstream& file)
 {
 	file << name;
 	string habitat_a[] = { "Тундра", "Пустыня", "Степь", "Сибирь" };
-	file << " Место обитания: " << habitat_a[habitat] << ". ";
+	file << " Место обитания: " << habitat_a[habitate] << ". ";
 }
 
 int Plant::OutConsonant()
@@ -108,28 +155,50 @@ Plant *Plant::InPlant(ifstream &file)
 	int key;
 	string name;
 	Plant *x;
-	file >> key;
+	string tmp;
+	//Ввод типа
+	getline(file, tmp);
+	if (tmp.empty() || tmp[0] == ' ' || tmp[0] == '\t') { return NULL; }
+	if (!is_number(tmp)) { return NULL; }
+	else { key = stoi(tmp); }
+	if (stoi(tmp) < 1 || stoi(tmp) > max_types) { return NULL; }
 	if (key == 1)
 	{
 		x = new Tree();
-		x->InCommon(file);
 	}
 	else if (key == 2)
 	{
 		x = new Shrub();
-		x->InCommon(file);
 	}
 	else if (key == 3)
 	{
 		x = new Flower();
-		x->InCommon(file);
 	}
 	else
 	{
 		//todo
 		exit(0);
 	}
+	x->InCommon(file);
+	if (x->name == "fail" || x->habitate == 0)
+		return NULL;
 	x->In(file);
+	if (x->name == "fail")
+	{
+		if (key == 1)
+		{
+			cout << ("Ошибка в вводе возраста дерева") << endl;
+		}
+		else if (key == 2)
+		{
+			cout << ("Ошибка в вводе месяца") << endl;
+		}
+		else if (key == 3)
+		{
+			cout << ("Ошибка в вводе типа цветка") << endl;
+		}
+		return NULL;
+	}
 	return x;
 }
 
@@ -169,7 +238,11 @@ void Container::In(ifstream &file)
 
 		node = new Node();
 		node->In(file);
-
+		if (node->cur == NULL)
+		{
+			cout << "Файл некорректно написан" << endl;
+			exit(0);
+		}
 		if (first == NULL)
 		{
 			first = node;

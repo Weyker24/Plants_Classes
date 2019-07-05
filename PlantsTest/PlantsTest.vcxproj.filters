@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="pch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PlantsTest.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Файл ресурсов">
+      <UniqueIdentifier>{4424bdde-d851-4b68-ba54-dad39d430597}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\x64\Debug\Test1_empty.txt">
+      <Filter>Файл ресурсов</Filter>
+    </Text>
+    <Text Include="..\x64\Debug\Test2_Wrong_Format.txt">
+      <Filter>Файл ресурсов</Filter>
+    </Text>
+    <Text Include="..\x64\Debug\Test3_Wrong_Format.txt">
+      <Filter>Файл ресурсов</Filter>
+    </Text>
+    <Text Include="..\x64\Debug\Test4_Wrong_Format.txt">
+      <Filter>Файл ресурсов</Filter>
+    </Text>
+    <Text Include="..\x64\Debug\Test5_Wrong_Format.txt">
+      <Filter>Файл ресурсов</Filter>
+    </Text>
+    <Text Include="..\x64\Debug\Test6_Wrong_Format.txt">
+      <Filter>Файл ресурсов</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
