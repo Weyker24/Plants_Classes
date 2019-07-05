@@ -7,6 +7,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Plants", "Plants\Plants.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlantsTest", "PlantsTest\PlantsTest.vcxproj", "{BA52F998-2131-4FB5-B6FA-F69FC19A9B4B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{E39DDA2D-4FDD-494B-88C8-4497157522CB}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -34,6 +39,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{48B06EC1-97C0-4886-AC65-6B3B41BA6BF2} = {E39DDA2D-4FDD-494B-88C8-4497157522CB}
+		{BA52F998-2131-4FB5-B6FA-F69FC19A9B4B} = {E39DDA2D-4FDD-494B-88C8-4497157522CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1C55156F-FCDC-4F58-B375-D14498A31E57}

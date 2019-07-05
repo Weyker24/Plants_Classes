@@ -8,7 +8,8 @@
 
 using namespace std;
 
-enum Type {
+enum Type
+{
 	TREE,
 	SHRUB
 };
@@ -47,31 +48,33 @@ enum G_habitat
 	SIBERIA
 };
 
-class Plant {
+class Plant
+{
 public:
 	string name;
 	G_habitat habitate;
 	int consonant;
-	void InCommon(ifstream &);
-	void OutCommon(ofstream &);
+	void InCommon( ifstream & );
+	void OutCommon( ofstream & );
 	int OutConsonant();
 
-	static Plant *InPlant(ifstream &);
-	static int ConsonantCount(string &);
+	static Plant *InPlant( ifstream & );
+	static int ConsonantCount( string & );
 
-	virtual void OutTree(ofstream &);
+	virtual void OutTree( ofstream & );
 
-	virtual void In(ifstream& in) = 0;
-	virtual void Out(ofstream& out) = 0;
+	virtual void In( ifstream& in ) = 0;
+	virtual void Out( ofstream& out ) = 0;
 };
 
-class Tree : public Plant {
+class Tree : public Plant
+{
 public:
 	int age;
-	void In(ifstream &);
-	void Out(ofstream &);
+	void In( ifstream & );
+	void Out( ofstream & );
 
-	void OutTree(ofstream &);
+	void OutTree( ofstream & );
 
 	Tree();
 	~Tree()
@@ -80,11 +83,12 @@ public:
 	}
 };
 
-class Shrub : public Plant {
+class Shrub : public Plant
+{
 public:
 	G_month month;
-	void In(ifstream &);
-	void Out(ofstream &);
+	void In( ifstream & );
+	void Out( ofstream & );
 
 	Shrub();
 	~Shrub()
@@ -93,11 +97,12 @@ public:
 	}
 };
 
-class Flower : public Plant {
+class Flower : public Plant
+{
 public:
 	G_type type;
-	void In(ifstream &);
-	void Out(ofstream &);
+	void In( ifstream & );
+	void Out( ofstream & );
 	Flower();
 	~Flower()
 	{
@@ -105,14 +110,15 @@ public:
 	}
 };
 
-class Node : public Plant {
+class Node : public Plant
+{
 public:
 	Plant *cur = NULL;
 	Node *prev = NULL;
 	Node *next = NULL;
-	void In(ifstream &);
-	void Out(ofstream &);
-	void OutTree(ofstream &);
+	void In( ifstream & );
+	void Out( ofstream & );
+	void OutTree( ofstream & );
 	Node();
 	~Node()
 	{
@@ -120,20 +126,21 @@ public:
 	}
 };
 
-class Container : public Plant {
-	enum { max_amount = 100 }; // максимальная длина
+class Container : public Plant
+{
+	enum { max_amount = 100 }; // РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР»РёРЅР°
 	int amount = 0;
-	Node *first = NULL; //Первый элемент
-	Node *last = NULL; //Последний элемент
+	Node *first = NULL; //РџРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚
+	Node *last = NULL; //РџРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚
 public:
-	void In(ifstream &);
-	void Out(ofstream &);
-	void OutTree(ofstream &);
+	void In( ifstream & );
+	void Out( ofstream & );
+	void OutTree( ofstream & );
 
 	void Sort();
-	void Pop(Node *);
-	void Push(Node *, Node *, Node *);
-	void Swap(Node *, Node *);
+	void Pop( Node * );
+	void Push( Node *, Node *, Node * );
+	void Swap( Node *, Node * );
 	Container();
 	~Container()
 	{

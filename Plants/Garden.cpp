@@ -5,22 +5,22 @@
 #define max_types 4
 #define max_habitates 4
 
-bool is_number(string s)
+bool is_number( string s )
 {
 	std::string::const_iterator it = s.begin();
-	isdigit(*it);
-	while (it != s.end() && isdigit(*it)) ++it;
+	isdigit( *it );
+	while ( it != s.end() && isdigit( *it ) ) ++it;
 	return !s.empty() && it == s.end();
 }
 
-bool is_good_string(string s)
+bool is_good_string( string s )
 {
 	std::string::const_iterator it = s.begin();
-	while (it != s.end() && isdigit(*it)) ++it;
-	return !s.empty() && it == s.end() && !(*it == ' ');
+	while ( it != s.end() && isdigit( *it ) ) ++it;
+	return !s.empty() && it == s.end() && !( *it == ' ' );
 }
 
-bool is_empty_file(std::ifstream& pFile)
+bool is_empty_file( std::ifstream& pFile )
 {
 	return pFile.peek() == std::ifstream::traits_type::eof();
 }
@@ -29,27 +29,27 @@ Tree::Tree()
 {
 	;
 }
-void Tree::In(ifstream &file)
+void Tree::In( ifstream &file )
 {
 	age = 0;
 	string tmp;
-	getline(file, tmp);
-	if (tmp.empty()) { age = -1; name = "fail"; return; }
-	if (!is_number(tmp)) { age = -2; name = "fail"; return;}
-	else { age = stoi(tmp); }
-	if (age < 0 || age > 3000) { age = -3; name = "fail"; return;}
+	getline( file, tmp );
+	if ( tmp.empty() ) { age = -1; name = "fail"; return; }
+	if ( !is_number( tmp ) ) { age = -2; name = "fail"; return; }
+	else { age = stoi( tmp ); }
+	if ( age < 0 || age > 3000 ) { age = -3; name = "fail"; return; }
 }
 
-void Tree::Out(ofstream &file)
+void Tree::Out( ofstream &file )
 {
-	file << "Œ·˙ÂÍÚ ÚËÔ‡: ‰ÂÂ‚Ó. Õ‡Á‚‡ÌËÂ: ";
-	this->OutCommon(file);
-	file << ". ¬ÓÁ‡ÒÚ: " << age << ".  ÓÎË˜ÂÒÚ‚Ó ÒÓ„Î‡ÒÌ˚ı ·ÛÍ‚ = " << OutConsonant() << "." << endl;
+	file << "–û–±—ä–µ–∫—Ç —Ç–∏–ø–∞: –¥–µ—Ä–µ–≤–æ. –ù–∞–∑–≤–∞–Ω–∏–µ: ";
+	this->OutCommon( file );
+	file << ". –í–æ–∑—Ä–∞—Å—Ç: " << age << ". –ö–æ–ª–∏—á–µ—Å—Ç–≤–æ —Å–æ–≥–ª–∞—Å–Ω—ã—Ö –±—É–∫–≤ = " << OutConsonant() << "." << endl;
 }
 
-void Tree::OutTree(ofstream &file)
+void Tree::OutTree( ofstream &file )
 {
-	Out(file);
+	Out( file );
 }
 
 Shrub::Shrub()
@@ -57,33 +57,33 @@ Shrub::Shrub()
 	;
 }
 
-void Shrub::In(ifstream &file)
+void Shrub::In( ifstream &file )
 {
-	month = (G_month)(0);
+	month = ( G_month ) ( 0 );
 	string tmp;
-	getline(file, tmp);
-	if (tmp.empty()) { month = (G_month)(0); name = "fail"; return;}
-	if (!is_number(tmp)) { month = (G_month)(0); name = "fail"; return;}
-	else { month = (G_month)stoi(tmp); month = (G_month)(stoi(tmp));}
-	if (stoi(tmp) < 1 || stoi(tmp) > 12) { month = (G_month)(0); name = "fail"; return;}
+	getline( file, tmp );
+	if ( tmp.empty() ) { month = ( G_month ) ( 0 ); name = "fail"; return; }
+	if ( !is_number( tmp ) ) { month = ( G_month ) ( 0 ); name = "fail"; return; }
+	else { month = ( G_month ) stoi( tmp ); month = ( G_month ) ( stoi( tmp ) ); }
+	if ( stoi( tmp ) < 1 || stoi( tmp ) > 12 ) { month = ( G_month ) ( 0 ); name = "fail"; return; }
 }
 
-void Shrub::Out(ofstream &file)
+void Shrub::Out( ofstream &file )
 {
-	file << "Œ·˙ÂÍÚ ÚËÔ‡: ÍÛÒÚ. Õ‡Á‚‡ÌËÂ: ";
-	OutCommon(file);
-	file << "ÃÂÒˇˆ ˆ‚ÂÚÂÌËˇ: ";
-	string months[] = { "ﬂÌ‚‡¸","‘Â‚‡Î¸","Ã‡Ú","¿ÔÂÎ¸","Ã‡È","»˛Ì¸","»˛Î¸","¿‚„ÛÒÚ","—ÂÌÚˇ·¸","ŒÍÚˇ·¸","ÕÓˇ·¸","ƒÂÍ‡·¸" };
-	file << months[month] << ".  ÓÎË˜ÂÒÚ‚Ó ÒÓ„Î‡ÒÌ˚ı ·ÛÍ‚ = " << OutConsonant() << "." << endl;
+	file << "–û–±—ä–µ–∫—Ç —Ç–∏–ø–∞: –∫—É—Å—Ç. –ù–∞–∑–≤–∞–Ω–∏–µ: ";
+	OutCommon( file );
+	file << "–ú–µ—Å—è—Ü —Ü–≤–µ—Ç–µ–Ω–∏—è: ";
+	string months[] = { "–Ø–Ω–≤–∞—Ä—å","–§–µ–≤—Ä–∞–ª—å","–ú–∞—Ä—Ç","–ê–ø—Ä–µ–ª—å","–ú–∞–π","–ò—é–Ω—å","–ò—é–ª—å","–ê–≤–≥—É—Å—Ç","–°–µ–Ω—Ç—è–±—Ä—å","–û–∫—Ç—è–±—Ä—å","–ù–æ—è–±—Ä—å","–î–µ–∫–∞–±—Ä—å" };
+	file << months [month] << ". –ö–æ–ª–∏—á–µ—Å—Ç–≤–æ —Å–æ–≥–ª–∞—Å–Ω—ã—Ö –±—É–∫–≤ = " << OutConsonant() << "." << endl;
 }
 
-int Plant::ConsonantCount(string &name)
+int Plant::ConsonantCount( string &name )
 {
 	int consonant = 0;
-	string alphabet_consonant("¡¬√ƒ∆« ÀÃÕœ–—“‘’÷◊ÿŸ·‚„‰ÊÁÍÎÏÌÔÒÚÙıˆ˜¯˘");
-	for (unsigned int i = 0; i < name.length(); i++)
+	string alphabet_consonant( "–ë–í–ì–î–ñ–ó–ö–õ–ú–ù–ü–†–°–¢–§–•–¶–ß–®–©–±–≤–≥–¥–∂–∑–∫–ª–º–Ω–ø—Ä—Å—Ç—Ñ—Ö—Ü—á—à—â" );
+	for ( unsigned int i = 0; i < name.length(); i++ )
 	{
-		if (alphabet_consonant.find(name[i]) != string::npos)
+		if ( alphabet_consonant.find( name [i] ) != string::npos )
 		{
 			consonant++;
 		}
@@ -96,48 +96,48 @@ Flower::Flower()
 {
 	;
 }
-void Flower::In(ifstream &file)
+void Flower::In( ifstream &file )
 {
-	type = (G_type)(0);
+	type = ( G_type ) ( 0 );
 	string tmp;
-	getline(file, tmp);
-	if (tmp.empty()) { type = (G_type)(0); name = "fail"; return;}
-	if (!is_number(tmp)) { type = (G_type)(0); name = "fail";return;}
-	else { type = (G_type)stoi(tmp); type = (G_type)(stoi(tmp)); }
-	if (stoi(tmp) < 1 || stoi(tmp) > 12) { type = (G_type)(0); name = "fail"; return;}
+	getline( file, tmp );
+	if ( tmp.empty() ) { type = ( G_type ) ( 0 ); name = "fail"; return; }
+	if ( !is_number( tmp ) ) { type = ( G_type ) ( 0 ); name = "fail"; return; }
+	else { type = ( G_type ) stoi( tmp ); type = ( G_type ) ( stoi( tmp ) ); }
+	if ( stoi( tmp ) < 1 || stoi( tmp ) > 12 ) { type = ( G_type ) ( 0 ); name = "fail"; return; }
 }
 
-void Flower::Out(ofstream &file)
+void Flower::Out( ofstream &file )
 {
-	file << "Œ·˙ÂÍÚ ÚËÔ‡: ˆ‚ÂÚ˚. Õ‡Á‚‡ÌËÂ: ";
-	this->OutCommon(file);
-	string types[] = { "ƒÓÏ‡¯ÌËÂ", "—‡‰Ó‚˚Â", "ƒËÍËÂ" };
-	file << "“ËÔ ‡ÒÚÂÌËˇ: " << types[type] << ".  ÓÎË˜ÂÒÚ‚Ó ÒÓ„Î‡ÒÌ˚ı ·ÛÍ‚ = " << OutConsonant() << "." << endl;
+	file << "–û–±—ä–µ–∫—Ç —Ç–∏–ø–∞: —Ü–≤–µ—Ç—ã. –ù–∞–∑–≤–∞–Ω–∏–µ: ";
+	this->OutCommon( file );
+	string types[] = { "–î–æ–º–∞—à–Ω–∏–µ", "–°–∞–¥–æ–≤—ã–µ", "–î–∏–∫–∏–µ" };
+	file << "–¢–∏–ø —Ä–∞—Å—Ç–µ–Ω–∏—è: " << types [type] << ". –ö–æ–ª–∏—á–µ—Å—Ç–≤–æ —Å–æ–≥–ª–∞—Å–Ω—ã—Ö –±—É–∫–≤ = " << OutConsonant() << "." << endl;
 }
 
-void Plant::InCommon(ifstream& file)
+void Plant::InCommon( ifstream& file )
 {
 	string tmp;
-	//¬‚Ó‰ ËÏÂÌË
-	getline(file, tmp);
-	if (tmp.empty()) { name = "fail"; return; }
-	if (is_number(tmp) && is_good_string(tmp)) { name = "fail"; return; }
+	//–í–≤–æ–¥ –∏–º–µ–Ω–∏
+	getline( file, tmp );
+	if ( tmp.empty() ) { name = "fail"; return; }
+	if ( is_number( tmp ) && is_good_string( tmp ) ) { name = "fail"; return; }
 	else { name = tmp; }
-	if (tmp.length() > 20) { name = "fail"; return; }
-	//¬‚Ó‰ ÏÂÒÚ‡ Ó·ËÚ‡ÌËˇ
-	getline(file, tmp);
-	if (tmp.empty()) { habitate = (G_habitat)(0); return; }
-	if (!is_number(tmp)) { habitate = (G_habitat)(0); return; }
-	else { habitate = (G_habitat)stoi(tmp); }
-	if (stoi(tmp) < 1 || stoi(tmp) > max_habitates) { habitate = (G_habitat)(0); return; }
-	consonant = ConsonantCount(name);
+	if ( tmp.length() > 20 ) { name = "fail"; return; }
+	//–í–≤–æ–¥ –º–µ—Å—Ç–∞ –æ–±–∏—Ç–∞–Ω–∏—è
+	getline( file, tmp );
+	if ( tmp.empty() ) { habitate = ( G_habitat ) ( 0 ); return; }
+	if ( !is_number( tmp ) ) { habitate = ( G_habitat ) ( 0 ); return; }
+	else { habitate = ( G_habitat ) stoi( tmp ); }
+	if ( stoi( tmp ) < 1 || stoi( tmp ) > max_habitates ) { habitate = ( G_habitat ) ( 0 ); return; }
+	consonant = ConsonantCount( name );
 }
 
-void Plant::OutCommon(ofstream& file)
+void Plant::OutCommon( ofstream& file )
 {
 	file << name;
-	string habitat_a[] = { "“ÛÌ‰‡", "œÛÒÚ˚Ìˇ", "—ÚÂÔ¸", "—Ë·Ë¸" };
-	file << " ÃÂÒÚÓ Ó·ËÚ‡ÌËˇ: " << habitat_a[habitate] << ". ";
+	string habitat_a[] = { "–¢—É–Ω–¥—Ä–∞", "–ü—É—Å—Ç—ã–Ω—è", "–°—Ç–µ–ø—å", "–°–∏–±–∏—Ä—å" };
+	file << " –ú–µ—Å—Ç–æ –æ–±–∏—Ç–∞–Ω–∏—è: " << habitat_a [habitate] << ". ";
 }
 
 int Plant::OutConsonant()
@@ -145,57 +145,57 @@ int Plant::OutConsonant()
 	return consonant;
 }
 
-void Plant::OutTree(ofstream& file)
+void Plant::OutTree( ofstream& file )
 {
 	;
 }
 
-Plant *Plant::InPlant(ifstream &file)
+Plant *Plant::InPlant( ifstream &file )
 {
 	int key;
 	string name;
 	Plant *x;
 	string tmp;
-	//¬‚Ó‰ ÚËÔ‡
-	getline(file, tmp);
-	if (tmp.empty() || tmp[0] == ' ' || tmp[0] == '\t') { return NULL; }
-	if (!is_number(tmp)) { return NULL; }
-	else { key = stoi(tmp); }
-	if (stoi(tmp) < 1 || stoi(tmp) > max_types) { return NULL; }
-	if (key == 1)
+	//–í–≤–æ–¥ —Ç–∏–ø–∞
+	getline( file, tmp );
+	if ( tmp.empty() || tmp [0] == ' ' || tmp [0] == '\t' ) { return NULL; }
+	if ( !is_number( tmp ) ) { return NULL; }
+	else { key = stoi( tmp ); }
+	if ( stoi( tmp ) < 1 || stoi( tmp ) > max_types ) { return NULL; }
+	if ( key == 1 )
 	{
 		x = new Tree();
 	}
-	else if (key == 2)
+	else if ( key == 2 )
 	{
 		x = new Shrub();
 	}
-	else if (key == 3)
+	else if ( key == 3 )
 	{
 		x = new Flower();
 	}
 	else
 	{
 		//todo
-		exit(0);
+		exit( 0 );
 	}
-	x->InCommon(file);
-	if (x->name == "fail" || x->habitate == 0)
+	x->InCommon( file );
+	if ( x->name == "fail" || x->habitate == 0 )
 		return NULL;
-	x->In(file);
-	if (x->name == "fail")
+	x->In( file );
+	if ( x->name == "fail" )
 	{
-		if (key == 1)
+		if ( key == 1 )
 		{
-			cout << ("Œ¯Ë·Í‡ ‚ ‚‚Ó‰Â ‚ÓÁ‡ÒÚ‡ ‰ÂÂ‚‡") << endl;
+			cout << ( "–û—à–∏–±–∫–∞ –≤ –≤–≤–æ–¥–µ –≤–æ–∑—Ä–∞—Å—Ç–∞ –¥–µ—Ä–µ–≤–∞" ) << endl;
 		}
-		else if (key == 2)
+		else if ( key == 2 )
 		{
-			cout << ("Œ¯Ë·Í‡ ‚ ‚‚Ó‰Â ÏÂÒˇˆ‡") << endl;
+			cout << ( "–û—à–∏–±–∫–∞ –≤ –≤–≤–æ–¥–µ –º–µ—Å—è—Ü–∞" ) << endl;
 		}
-		else if (key == 3)
+		else if ( key == 3 )
 		{
-			cout << ("Œ¯Ë·Í‡ ‚ ‚‚Ó‰Â ÚËÔ‡ ˆ‚ÂÚÍ‡") << endl;
+			cout << ( "–û—à–∏–±–∫–∞ –≤ –≤–≤–æ–¥–µ —Ç–∏–ø–∞ —Ü–≤–µ—Ç–∫–∞" ) << endl;
 		}
 		return NULL;
 	}
@@ -207,21 +207,21 @@ Node::Node()
 	;
 }
 
-void Node::In(ifstream &file)
+void Node::In( ifstream &file )
 {
-	Plant *plant = Plant::InPlant(file);
+	Plant *plant = Plant::InPlant( file );
 
 	cur = plant;
 }
 
-void Node::Out(ofstream &file)
+void Node::Out( ofstream &file )
 {
-	cur->Out(file);
+	cur->Out( file );
 }
 
-void Node::OutTree(ofstream &file)
+void Node::OutTree( ofstream &file )
 {
-	cur->OutTree(file);
+	cur->OutTree( file );
 }
 
 Container::Container()
@@ -229,21 +229,21 @@ Container::Container()
 	;
 }
 
-void Container::In(ifstream &file)
+void Container::In( ifstream &file )
 {
 	Node *node;
-	for (; !file.eof(); )
+	for ( ; !file.eof(); )
 	{
 		amount++;
 
 		node = new Node();
-		node->In(file);
-		if (node->cur == NULL)
+		node->In( file );
+		if ( node->cur == NULL )
 		{
-			cout << "‘‡ÈÎ ÌÂÍÓÂÍÚÌÓ Ì‡ÔËÒ‡Ì" << endl;
-			exit(0);
+			cout << "–§–∞–π–ª –Ω–µ–∫–æ—Ä—Ä–µ–∫—Ç–Ω–æ –Ω–∞–ø–∏—Å–∞–Ω" << endl;
+			exit( 0 );
 		}
-		if (first == NULL)
+		if ( first == NULL )
 		{
 			first = node;
 			last = node;
@@ -255,36 +255,36 @@ void Container::In(ifstream &file)
 		first->prev = node;
 		last = node;
 
-		if (amount == max_amount)
+		if ( amount == max_amount )
 		{
-			cout << "Œ¯Ë·Í‡: ‰ÓÒÚË„ÌÛÚ Ï‡ÍÒËÏ‡Î¸ÌÓÂ ÍÓÎË˜ÂÒÚ‚Ó ˝ÎÂÏÂÌÚÓ‚." << endl;
-			cout << "œÓ„‡ÏÏ‡ ÔÓ‰ÓÎÊËÚ ‚˚ÔÓÎÌÂÌËÂ Ò ÚÂÍÛ˘ËÏ ÒÓ‰ÂÊËÏ˚Ï." << endl;
+			cout << "–û—à–∏–±–∫–∞: –¥–æ—Å—Ç–∏–≥–Ω—É—Ç –º–∞–∫—Å–∏–º–∞–ª—å–Ω–æ–µ –∫–æ–ª–∏—á–µ—Å—Ç–≤–æ —ç–ª–µ–º–µ–Ω—Ç–æ–≤." << endl;
+			cout << "–ü—Ä–æ–≥—Ä–∞–º–º–∞ –ø—Ä–æ–¥–æ–ª–∂–∏—Ç –≤—ã–ø–æ–ª–Ω–µ–Ω–∏–µ —Å —Ç–µ–∫—É—â–∏–º —Å–æ–¥–µ—Ä–∂–∏–º—ã–º." << endl;
 			return;
 		}
 	}
 
 }
 
-void Container::Out(ofstream &file)
+void Container::Out( ofstream &file )
 {
 	Node *node;
-	file << " ÓÎË˜ÂÒÚ‚Ó ı‡Ìˇ˘ËıÒˇ ˝ÎÂÏÂÌÚÓ‚: " << amount << endl;
+	file << "–ö–æ–ª–∏—á–µ—Å—Ç–≤–æ —Ö—Ä–∞–Ω—è—â–∏—Ö—Å—è —ç–ª–µ–º–µ–Ω—Ç–æ–≤: " << amount << endl;
 	node = first;
-	for (int i = 0; i < amount; i++)
+	for ( int i = 0; i < amount; i++ )
 	{
-		node->Out(file);
+		node->Out( file );
 		node = node->next;
 	}
 }
 
-void Container::OutTree(ofstream &file)
+void Container::OutTree( ofstream &file )
 {
 	Node *node;
-	file << " ÓÎË˜ÂÒÚ‚Ó ı‡Ìˇ˘ËıÒˇ ˝ÎÂÏÂÌÚÓ‚: " << amount << endl;
+	file << "–ö–æ–ª–∏—á–µ—Å—Ç–≤–æ —Ö—Ä–∞–Ω—è—â–∏—Ö—Å—è —ç–ª–µ–º–µ–Ω—Ç–æ–≤: " << amount << endl;
 	node = first;
-	for (int i = 0; i < amount; i++)
+	for ( int i = 0; i < amount; i++ )
 	{
-		node->OutTree(file);
+		node->OutTree( file );
 		node = node->next;
 	}
 }
@@ -295,27 +295,27 @@ void Container::Sort()
 	Node *tmp;
 	Node *tmp2;
 
-	for (node_cur = first->next; node_cur != first;)
+	for ( node_cur = first->next; node_cur != first;)
 	{
-		if (node_cur->cur->OutConsonant() < node_cur->prev->cur->OutConsonant())
+		if ( node_cur->cur->OutConsonant() < node_cur->prev->cur->OutConsonant() )
 		{
 			tmp2 = node_cur;
 			node_cur = node_cur->next;
-			if (first->cur->OutConsonant() > tmp2->cur->OutConsonant())
+			if ( first->cur->OutConsonant() > tmp2->cur->OutConsonant() )
 			{
-				Pop(tmp2);
-				Push(first->prev, first, tmp2);
+				Pop( tmp2 );
+				Push( first->prev, first, tmp2 );
 				first = tmp2;
 				last = tmp2->prev;
 			}
 			else
 			{
-				for (tmp = tmp2->prev; tmp != first->prev; tmp = tmp->prev)
+				for ( tmp = tmp2->prev; tmp != first->prev; tmp = tmp->prev )
 				{
-					if ((tmp->cur->OutConsonant() > tmp2->cur->OutConsonant()) && (tmp->prev->cur->OutConsonant() <= tmp2->cur->OutConsonant()))
+					if ( ( tmp->cur->OutConsonant() > tmp2->cur->OutConsonant() ) && ( tmp->prev->cur->OutConsonant() <= tmp2->cur->OutConsonant() ) )
 					{
-						Pop(tmp2);
-						Push(tmp->prev, tmp, tmp2);
+						Pop( tmp2 );
+						Push( tmp->prev, tmp, tmp2 );
 						break;
 					}
 				}
@@ -328,13 +328,13 @@ void Container::Sort()
 	}
 }
 
-void Container::Pop(Node *node)
+void Container::Pop( Node *node )
 {
 	node->prev->next = node->next;
 	node->next->prev = node->prev;
 }
-//¬ÒÚ‡‚ÎˇÂÚ node3 ÏÂÊ‰Û node1 Ë node2.
-void Container::Push(Node *node1, Node *node2, Node *node3)
+//–í—Å—Ç–∞–≤–ª—è–µ—Ç node3 –º–µ–∂–¥—É node1 –∏ node2.
+void Container::Push( Node *node1, Node *node2, Node *node3 )
 {
 	node1->next = node3;
 	node2->prev = node3;
@@ -342,7 +342,7 @@ void Container::Push(Node *node1, Node *node2, Node *node3)
 	node3->next = node2;
 }
 
-void Container::Swap(Node *node1, Node *node2)
+void Container::Swap( Node *node1, Node *node2 )
 {
 	Node *new_node = new Node;
 
