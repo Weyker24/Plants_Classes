@@ -39,6 +39,42 @@ void Shrub::Out(ofstream &file)
 	file << months[month] << "." << endl;
 }
 
+// Вывод двух прямоугольников
+void Tree::MMTree( ofstream &file )
+{
+	file << "Дерево и дерево" << endl;
+}
+//-----------------------------------------------------
+// Вывод треугольника и прямоугольника
+void Tree::MMShrub( ofstream &file )
+{
+	file << "Куст и дерево" << endl;
+}
+//-----------------------------------------------------
+// Вывод прямоугольника и треугольника
+void Shrub::MMTree( ofstream &file )
+{
+	file << "Дерево и куст" << endl;
+}
+//-----------------------------------------------------
+// Вывод двух треугольников
+void Shrub::MMShrub( ofstream &file )
+{
+	file << "Куст и куст" << endl;
+}
+// мультиметод
+void Tree::MultiMethod( Plant *other,
+							 ofstream &file )
+{
+	other->MMTree( file );
+}
+//-----------------------------------------------------
+// мультиметод
+void Shrub::MultiMethod( Plant *other,
+						ofstream &file )
+{
+	other->MMShrub( file );
+}
 void Plant::InCommon(ifstream& file)
 {
 	file >> name;
@@ -136,5 +172,26 @@ void Container::Out(ofstream &file)
 	{
 		node->Out(file);
 		node = node->next;
+	}
+}
+
+// Вызов мультиметода для элементов контейнера
+void Container::MultiMethod( ofstream &file )
+{
+	Node *first_tmp;
+	Node *second_tmp;
+	first_tmp = first;
+	file << "Multimethod." << endl;
+	for ( int i = 0; i < amount - 1; i++ )
+	{
+		second_tmp = first_tmp->next;
+		for ( int j = i + 1; j < amount; j++ )
+		{
+			first_tmp->cur->MultiMethod( second_tmp->cur, file );
+			first_tmp->cur->Out( file );
+			second_tmp->cur->Out( file );
+			second_tmp = second_tmp->next;
+		}
+		first_tmp = first_tmp->next;
 	}
 }

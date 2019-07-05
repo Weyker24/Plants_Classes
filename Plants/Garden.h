@@ -38,6 +38,10 @@ public:
 
 	virtual void In(ifstream& in) = 0;
 	virtual void Out(ofstream& out) = 0;
+
+	virtual void MultiMethod( Plant *other, ofstream &file ) = 0;
+	virtual void MMTree( ofstream &file ) = 0;
+	virtual void MMShrub( ofstream &file ) = 0;
 };
 
 class Tree : public Plant {
@@ -46,6 +50,11 @@ public:
 	void In(ifstream &);
 	void Out(ofstream &);
 	Tree();
+
+	void MultiMethod( Plant *other, ofstream &file );
+	void MMTree( ofstream &file );
+	void MMShrub( ofstream &file );
+
 	~Tree()
 	{
 		void Clear();
@@ -58,6 +67,11 @@ public:
 	void In(ifstream &);
 	void Out(ofstream &);
 	Shrub();
+
+	void MultiMethod( Plant *other, ofstream &file );
+	void MMTree( ofstream &file );
+	void MMShrub( ofstream &file );
+
 	~Shrub()
 	{
 		void Clear();
@@ -71,6 +85,11 @@ public:
 	Node *next = NULL;
 	void In(ifstream &);
 	void Out(ofstream &);
+
+	void MultiMethod( Plant *other, ofstream &file ) { ; }
+	void MMTree( ofstream &file ) { ; }
+	void MMShrub( ofstream &file ) { ; }
+
 	Node();
 	~Node()
 	{
@@ -84,8 +103,14 @@ class Container : public Plant {
 	Node *first = NULL; //Первый элемент
 	Node *last = NULL; //Последний элемент
 public:
+	
 	void In(ifstream &);
 	void Out(ofstream &);
+
+	void MultiMethod( ofstream &file );
+	void MultiMethod( Plant *other, ofstream &file ) { ; }
+	void MMTree( ofstream &file ) { ; }
+	void MMShrub( ofstream &file ) { ; }
 	Container();
 	~Container()
 	{
