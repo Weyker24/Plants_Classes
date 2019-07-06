@@ -74,6 +74,44 @@ void Shrub::Out( ofstream &file )
 	file << months [month] << ". Количество согласных букв = " << OutConsonant() << "." << endl;
 }
 
+// Вывод двух деревьев
+void Tree::MMTree( ofstream &file )
+{
+	file << "Дерево и дерево" << endl;
+}
+//-----------------------------------------------------
+// Вывод сначала куста, а затем дерева
+void Tree::MMShrub( ofstream &file )
+{
+	file << "Куст и дерево" << endl;
+}
+//-----------------------------------------------------
+// Вывод сначала дерева, а затем куста
+void Shrub::MMTree( ofstream &file )
+{
+	file << "Дерево и куст" << endl;
+}
+//-----------------------------------------------------
+// Вывод двух кустов
+void Shrub::MMShrub( ofstream &file )
+{
+	file << "Куст и куст" << endl;
+}
+// мультиметод
+void Tree::MultiMethod( Plant *other,
+							 ofstream &file )
+{
+	other->MMTree( file );
+}
+//-----------------------------------------------------
+// мультиметод
+void Shrub::MultiMethod( Plant *other,
+						ofstream &file )
+{
+	other->MMShrub( file );
+}
+
+void Plant::InCommon(ifstream& file)
 int Plant::ConsonantCount( string &name )
 {
 	int consonant = 0;
@@ -346,4 +384,26 @@ void Container::Swap( Node *node1, Node *node2 )
 	new_node->cur = node2->cur;
 	node1->cur = node2->cur;
 	node2->cur = new_node->cur;
+}
+}
+
+// Вызов мультиметода для элементов контейнера
+void Container::MultiMethod( ofstream &file )
+{
+	Node *first_tmp;
+	Node *second_tmp;
+	first_tmp = first;
+	file << "Мультиметод." << endl;
+	for ( int i = 0; i < amount - 1; i++ )
+	{
+		second_tmp = first_tmp->next;
+		for ( int j = i + 1; j < amount; j++ )
+		{
+			first_tmp->cur->MultiMethod( second_tmp->cur, file );
+			first_tmp->cur->Out( file );
+			second_tmp->cur->Out( file );
+			second_tmp = second_tmp->next;
+		}
+		first_tmp = first_tmp->next;
+	}
 }

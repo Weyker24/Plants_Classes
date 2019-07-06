@@ -52,6 +52,7 @@ int main( int argc, char* argv[] )
 
 	file_o << endl;
 
+	container->MultiMethod(file_o);
 	container->Sort();
 
 	container->Out( file_o );

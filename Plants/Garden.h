@@ -77,6 +77,12 @@ public:
 	void OutCommon( ofstream & ); // метод для вывода общих параметров
 	int OutConsonant(); // метод вывода количества согласных букв в слове
 
+	virtual void In(ifstream& in) = 0;
+	virtual void Out(ofstream& out) = 0;
+
+	virtual void MultiMethod( Plant *other, ofstream &file ) = 0;
+	virtual void MMTree( ofstream &file ) = 0;
+	virtual void MMShrub( ofstream &file ) = 0;
 	static Plant *InPlant( ifstream & ); // основной метод для создания нового объекта
 	static int ConsonantCount( string & ); // метод для подсчета количеста согласных букв в названии
 
@@ -97,6 +103,11 @@ public:
 	void OutTree( ofstream & );
 
 	Tree();
+
+	void MultiMethod( Plant *other, ofstream &file );
+	void MMTree( ofstream &file );
+	void MMShrub( ofstream &file );
+
 	~Tree()
 	{
 		void Clear();
@@ -112,6 +123,11 @@ public:
 	void Out( ofstream & ); // Метод вывода в файл
 
 	Shrub();
+
+	void MultiMethod( Plant *other, ofstream &file );
+	void MMTree( ofstream &file );
+	void MMShrub( ofstream &file );
+
 	~Shrub()
 	{
 		void Clear();
@@ -138,6 +154,16 @@ public:
 class Node : public Plant
 {
 public:
+	Plant *cur = NULL;
+	Node *prev = NULL;
+	Node *next = NULL;
+	void In(ifstream &);
+	void Out(ofstream &);
+
+	void MultiMethod( Plant *other, ofstream &file ) { ; }
+	void MMTree( ofstream &file ) { ; }
+	void MMShrub( ofstream &file ) { ; }
+
 	Plant *cur = NULL; // Указатель на текущий элемент
 	Node *prev = NULL; // Указатель на предыдущий элемент
 	Node *next = NULL; // Указатель на следующий элемент
@@ -169,6 +195,14 @@ public:
 	void Pop( Node * ); // Метод изъятия элемента из контейнера
 	void Push( Node *, Node *, Node * ); // Метод занесения элемента контейнера
 	void Swap( Node *, Node * ); // Метод, которая меняет местами 2 элемента
+	
+	void In(ifstream &);
+	void Out(ofstream &);
+
+	void MultiMethod( ofstream &file );
+	void MultiMethod( Plant *other, ofstream &file ) { ; }
+	void MMTree( ofstream &file ) { ; }
+	void MMShrub( ofstream &file ) { ; }
 	Container();
 	~Container()
 	{
