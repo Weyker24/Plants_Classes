@@ -48,16 +48,11 @@ int main( int argc, char* argv[] )
 	//Вводим данные.
 	container->In( file_i );
 
-	container->Out( file_o );
-
-	file_o << endl;
+	//container->Out( file_o );
 
 	container->MultiMethod(file_o);
-	container->Sort();
+	//container->Sort();
 
-	container->Out( file_o );
-	file_o << endl;
-	container->OutTree( file_o );
 	file_i.close();
 	file_o.close();
 

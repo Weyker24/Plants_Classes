@@ -58,7 +58,7 @@ enum GenHabitat
 //Первый тип изпользуется для выявлении ошибок
 enum GenType
 {
-	FAIL_T,
+	FAIL_GEN_T,
 	HOME,
 	GARDEN,
 	WILD
@@ -73,23 +73,24 @@ public:
 	string name; // название растения
 	GenHabitat habitate; // место обитания
 	int consonant; // количество согласных букв в названии
+
 	void InCommon( ifstream & ); // метод для ввода общих параметров
 	void OutCommon( ofstream & ); // метод для вывода общих параметров
-	int OutConsonant(); // метод вывода количества согласных букв в слове
 
-	virtual void In(ifstream& in) = 0;
-	virtual void Out(ofstream& out) = 0;
-
-	virtual void MultiMethod( Plant *other, ofstream &file ) = 0;
-	virtual void MMTree( ofstream &file ) = 0;
-	virtual void MMShrub( ofstream &file ) = 0;
 	static Plant *InPlant( ifstream & ); // основной метод для создания нового объекта
+
 	static int ConsonantCount( string & ); // метод для подсчета количеста согласных букв в названии
+	int OutConsonant(); // метод вывода количества согласных букв в слове
 
 	virtual void OutTree( ofstream & ); // метод для фильтрованного вывода
 
 	virtual void In( ifstream& in ) = 0; // чисто виртуальный метод ввода для наследуемых классов
 	virtual void Out( ofstream& out ) = 0; // чисто виртуальный метод вывода для наследуемых классов
+
+	virtual void MultiMethod( Plant *other, ofstream &file ) = 0;
+	virtual void MMTree( ofstream &file ) = 0;
+	virtual void MMShrub( ofstream &file ) = 0;
+	virtual void MMFlower( ofstream &file ) = 0;
 };
 
 // Класс Three используется для хранении информации о введенном дереве
@@ -107,6 +108,7 @@ public:
 	void MultiMethod( Plant *other, ofstream &file );
 	void MMTree( ofstream &file );
 	void MMShrub( ofstream &file );
+	void MMFlower( ofstream &file );
 
 	~Tree()
 	{
@@ -127,6 +129,7 @@ public:
 	void MultiMethod( Plant *other, ofstream &file );
 	void MMTree( ofstream &file );
 	void MMShrub( ofstream &file );
+	void MMFlower( ofstream &file );
 
 	~Shrub()
 	{
@@ -141,6 +144,12 @@ public:
 	GenType type; //тип цветка
 	void In( ifstream & );
 	void Out( ofstream & );
+
+	void MultiMethod( Plant *other, ofstream &file );
+	void MMTree( ofstream &file );
+	void MMShrub( ofstream &file );
+	void MMFlower( ofstream &file );
+
 	Flower();
 	~Flower()
 	{
@@ -157,19 +166,15 @@ public:
 	Plant *cur = NULL;
 	Node *prev = NULL;
 	Node *next = NULL;
-	void In(ifstream &);
-	void Out(ofstream &);
+	void In( ifstream & );
+	void Out( ofstream & );
+	void OutTree( ofstream & );
 
 	void MultiMethod( Plant *other, ofstream &file ) { ; }
 	void MMTree( ofstream &file ) { ; }
 	void MMShrub( ofstream &file ) { ; }
+	void MMFlower( ofstream &file ) { ; }
 
-	Plant *cur = NULL; // Указатель на текущий элемент
-	Node *prev = NULL; // Указатель на предыдущий элемент
-	Node *next = NULL; // Указатель на следующий элемент
-	void In( ifstream & );
-	void Out( ofstream & );
-	void OutTree( ofstream & );
 	Node();
 	~Node()
 	{
@@ -187,22 +192,20 @@ class Container : public Plant
 	Node *first = NULL; //Первый элемент
 	Node *last = NULL; //Последний элемент
 public:
-	void In( ifstream & ); 
-	void Out( ofstream & ); 
+	void In( ifstream & );
+	void Out( ofstream & );
 	void OutTree( ofstream & ); // Метод фильтрованного ввода в файл
 
 	void Sort(); // Метод сортировки
 	void Pop( Node * ); // Метод изъятия элемента из контейнера
 	void Push( Node *, Node *, Node * ); // Метод занесения элемента контейнера
 	void Swap( Node *, Node * ); // Метод, которая меняет местами 2 элемента
-	
-	void In(ifstream &);
-	void Out(ofstream &);
 
 	void MultiMethod( ofstream &file );
 	void MultiMethod( Plant *other, ofstream &file ) { ; }
 	void MMTree( ofstream &file ) { ; }
 	void MMShrub( ofstream &file ) { ; }
+	void MMFlower( ofstream &file ) { ; }
 	Container();
 	~Container()
 	{
